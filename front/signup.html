@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Node - SignUp</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+</head>
+<body>
+<form class="text-center border border-light p-5" action="#!">
+    <p class="h4 mb-4">Sign up</p>
+
+    <div class="form-row mb-4">
+        <div class="col">
+            <label for="username">Username</label>
+            <input type="text" id="username" required class="form-control" placeholder="Username">
+        </div>
+
+        <label for="email">Email address</label>
+        <input type="email" id="email" required class="form-control mb-4" placeholder="E-mail">
+
+        <label for="password-current">Password</label>
+        <input type="password" id="password-current" required class="form-control" placeholder="Password" >
+
+    <button class="btn btn-info my-4 btn-block" type="submit">Sign in</button>
+    </div>
+</form>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+    addEventListener('submit', (e) => {
+        let email = document.querySelector("#email")
+        let password = document.querySelector("#password-current")
+        let username = document.querySelector("#username")
+        e.preventDefault()
+        axios.post('http://localhost:8080/auth/signup',{email:email.value,password:password.value,username:username.value})
+            .then(function (response) {
+                console.log(response.data)
+                alert(response.data.msg)
+            })
+            .catch(function (error) {
+                console.log(error.response.data)
+                alert(error.response.data.msg)
+            })
+    })
+</script>
+</body>
+</html>
